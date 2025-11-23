@@ -62,6 +62,7 @@ pnpm test
 ### Deployment Steps
 
 1. **Push to Git Repository**
+
    ```bash
    git add .
    git commit -m "Ready for Vercel deployment"

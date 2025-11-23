@@ -55,7 +55,7 @@ export const handlePaymentSubmit: RequestHandler = async (req, res) => {
     const now = new Date();
     const month = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(
       2,
-      "0"
+      "0",
     )}`;
 
     // Check for duplicate transaction ID in same month
@@ -63,7 +63,7 @@ export const handlePaymentSubmit: RequestHandler = async (req, res) => {
       (p) =>
         p.transactionId === transactionId &&
         p.flatNumber === flatNumber &&
-        p.month === month
+        p.month === month,
     );
 
     if (duplicate) {
@@ -112,11 +112,9 @@ export const getDashboardData = (month: string) => {
 
   const totalCollected = monthPayments.reduce(
     (sum, p) => sum + p.amountPaid,
-    0
+    0,
   );
-  const uniqueFlats = new Set(
-    monthPayments.map((p) => p.flatNumber)
-  );
+  const uniqueFlats = new Set(monthPayments.map((p) => p.flatNumber));
   const flatsPaid = uniqueFlats.size;
 
   // For demo purposes, assume 40 total flats (5 floors × 8 flats each)

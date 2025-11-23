@@ -38,7 +38,7 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [selectedMonth, setSelectedMonth] = useState(
-    new Date().toISOString().slice(0, 7)
+    new Date().toISOString().slice(0, 7),
   );
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     totalCollected: 45200,
@@ -69,7 +69,7 @@ export default function AdminDashboard() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -177,7 +177,10 @@ export default function AdminDashboard() {
         {/* Summary Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {/* Total Collected */}
-          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.3s" }}>
+          <Card
+            className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up"
+            style={{ animationDelay: "0.3s" }}
+          >
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -197,7 +200,10 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Total Pending */}
-          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.4s" }}>
+          <Card
+            className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up"
+            style={{ animationDelay: "0.4s" }}
+          >
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -217,7 +223,10 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Flats Paid */}
-          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.5s" }}>
+          <Card
+            className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up"
+            style={{ animationDelay: "0.5s" }}
+          >
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -237,7 +246,10 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Flats Not Paid */}
-          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.6s" }}>
+          <Card
+            className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up"
+            style={{ animationDelay: "0.6s" }}
+          >
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -252,8 +264,8 @@ export default function AdminDashboard() {
               </div>
             </div>
             <p className="text-xs text-muted-foreground">
-              Out of{" "}
-              {dashboardData.flatsPaid + dashboardData.flatsNotPaid} total
+              Out of {dashboardData.flatsPaid + dashboardData.flatsNotPaid}{" "}
+              total
             </p>
           </Card>
         </div>
@@ -310,7 +322,10 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent Activity */}
-        <Card className="glass p-6 fade-in-up" style={{ animationDelay: "0.95s" }}>
+        <Card
+          className="glass p-6 fade-in-up"
+          style={{ animationDelay: "0.95s" }}
+        >
           <h2 className="text-lg font-semibold text-foreground mb-4">
             Recent Activity
           </h2>

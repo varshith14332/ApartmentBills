@@ -67,8 +67,7 @@ export default function AdminLogin() {
       setError(error instanceof Error ? error.message : "Login failed");
       toast({
         title: "Error",
-        description:
-          error instanceof Error ? error.message : "Login failed",
+        description: error instanceof Error ? error.message : "Login failed",
         variant: "destructive",
       });
     } finally {
@@ -84,7 +83,10 @@ export default function AdminLogin() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-8 fade-in-down" style={{ animationDelay: "0s" }}>
+        <div
+          className="flex items-center justify-center gap-3 mb-8 fade-in-down"
+          style={{ animationDelay: "0s" }}
+        >
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center float">
             <Building2 className="w-6 h-6 text-primary-foreground" />
           </div>
@@ -92,14 +94,15 @@ export default function AdminLogin() {
         </div>
 
         {/* Login Card */}
-        <Card className="glass p-8 shadow-lg fade-in-up" style={{ animationDelay: "0.2s" }}>
+        <Card
+          className="glass p-8 shadow-lg fade-in-up"
+          style={{ animationDelay: "0.2s" }}
+        >
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-foreground mb-2">
               Admin Login
             </h2>
-            <p className="text-muted-foreground">
-              Treasurer dashboard access
-            </p>
+            <p className="text-muted-foreground">Treasurer dashboard access</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

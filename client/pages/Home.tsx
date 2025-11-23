@@ -25,14 +25,22 @@ export default function Home() {
       {/* Navigation */}
       <nav className="border-b border-border bg-white/50 backdrop-blur-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 fade-in-down" style={{ animationDelay: "0s" }}>
+          <div
+            className="flex items-center gap-2 fade-in-down"
+            style={{ animationDelay: "0s" }}
+          >
             <Building2 className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold text-foreground">
               Treasury Management
             </span>
           </div>
           <Link to="/admin/login">
-            <Button variant="outline" size="sm" className="fade-in-down" style={{ animationDelay: "0.1s" }}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="fade-in-down"
+              style={{ animationDelay: "0.1s" }}
+            >
               Admin Login
             </Button>
           </Link>
@@ -47,7 +55,10 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className={isVisible ? "fade-in-up" : "opacity-0"} style={{ animationDelay: "0.2s" }}>
+            <div
+              className={isVisible ? "fade-in-up" : "opacity-0"}
+              style={{ animationDelay: "0.2s" }}
+            >
               <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight mb-6 bg-clip-text">
                 Modern Apartment Treasury Management
               </h1>
@@ -73,10 +84,30 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Upload, title: "Easy Uploads", desc: "Submit payment proofs instantly", delay: "0.3s" },
-                { icon: BarChart3, title: "Auto Reports", desc: "Monthly summaries generated", delay: "0.4s" },
-                { icon: Users, title: "Resident Tracking", desc: "Monitor all flat contributions", delay: "0.5s" },
-                { icon: Clock, title: "Real-time Updates", desc: "Track dues in real-time", delay: "0.6s" },
+                {
+                  icon: Upload,
+                  title: "Easy Uploads",
+                  desc: "Submit payment proofs instantly",
+                  delay: "0.3s",
+                },
+                {
+                  icon: BarChart3,
+                  title: "Auto Reports",
+                  desc: "Monthly summaries generated",
+                  delay: "0.4s",
+                },
+                {
+                  icon: Users,
+                  title: "Resident Tracking",
+                  desc: "Monitor all flat contributions",
+                  delay: "0.5s",
+                },
+                {
+                  icon: Clock,
+                  title: "Real-time Updates",
+                  desc: "Track dues in real-time",
+                  delay: "0.6s",
+                },
               ].map(({ icon: Icon, title, desc, delay }) => (
                 <div
                   key={title}
@@ -87,9 +118,7 @@ export default function Home() {
                   <h3 className="font-semibold text-foreground mb-2">
                     {title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {desc}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{desc}</p>
                 </div>
               ))}
             </div>
@@ -100,15 +129,46 @@ export default function Home() {
       {/* Quick Stats / Dashboard Teaser */}
       <section className="py-12 md:py-16 bg-white/50 backdrop-blur-lg border-y border-border">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10 text-center fade-in" style={{ animationDelay: "0.3s" }}>
+          <h2
+            className="text-3xl md:text-4xl font-bold text-foreground mb-10 text-center fade-in"
+            style={{ animationDelay: "0.3s" }}
+          >
             This Month's Overview
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { label: "Total Collected", value: "₹45,200", count: "From 18 flats", icon: CheckCircle, color: "blue", delay: "0.4s" },
-              { label: "Total Pending", value: "₹12,500", count: "From 7 flats", icon: Clock, color: "orange", delay: "0.5s" },
-              { label: "Flats Paid", value: "18", count: "72% collection rate", icon: Users, color: "green", delay: "0.6s" },
-              { label: "Not Paid", value: "7", count: "Out of 25 total", icon: Building2, color: "red", delay: "0.7s" },
+              {
+                label: "Total Collected",
+                value: "₹45,200",
+                count: "From 18 flats",
+                icon: CheckCircle,
+                color: "blue",
+                delay: "0.4s",
+              },
+              {
+                label: "Total Pending",
+                value: "₹12,500",
+                count: "From 7 flats",
+                icon: Clock,
+                color: "orange",
+                delay: "0.5s",
+              },
+              {
+                label: "Flats Paid",
+                value: "18",
+                count: "72% collection rate",
+                icon: Users,
+                color: "green",
+                delay: "0.6s",
+              },
+              {
+                label: "Not Paid",
+                value: "7",
+                count: "Out of 25 total",
+                icon: Building2,
+                color: "red",
+                delay: "0.7s",
+              },
             ].map(({ label, value, count, icon: Icon, color, delay }, idx) => {
               const colors = {
                 blue: "from-blue-50 to-blue-100/50 border-blue-200",
@@ -146,13 +206,15 @@ export default function Home() {
                         {value}
                       </p>
                     </div>
-                    <div className={`w-10 h-10 bg-gradient-to-br ${colors[color as keyof typeof colors]} rounded-lg flex items-center justify-center`}>
-                      <Icon className={`w-5 h-5 ${iconColors[color as keyof typeof iconColors]}`} />
+                    <div
+                      className={`w-10 h-10 bg-gradient-to-br ${colors[color as keyof typeof colors]} rounded-lg flex items-center justify-center`}
+                    >
+                      <Icon
+                        className={`w-5 h-5 ${iconColors[color as keyof typeof iconColors]}`}
+                      />
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    {count}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{count}</p>
                 </div>
               );
             })}
@@ -163,7 +225,10 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12 text-center fade-in" style={{ animationDelay: "0.4s" }}>
+          <h2
+            className="text-3xl md:text-4xl font-bold text-foreground mb-12 text-center fade-in"
+            style={{ animationDelay: "0.4s" }}
+          >
             Powerful Features for Apartment Management
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -171,43 +236,73 @@ export default function Home() {
               {
                 icon: Upload,
                 title: "Digital Payment Proofs",
-                description: "Residents submit screenshots of payment transfers. No more paper trails or manual verification.",
-                points: ["Multiple payment methods", "Instant submission", "Secure uploads"],
+                description:
+                  "Residents submit screenshots of payment transfers. No more paper trails or manual verification.",
+                points: [
+                  "Multiple payment methods",
+                  "Instant submission",
+                  "Secure uploads",
+                ],
                 delay: "0.5s",
               },
               {
                 icon: BarChart3,
                 title: "Automated Reports",
-                description: "Monthly tables auto-generated showing collection status, pending dues, and payment details.",
-                points: ["PDF/Excel export", "Payment breakdowns", "Historical tracking"],
+                description:
+                  "Monthly tables auto-generated showing collection status, pending dues, and payment details.",
+                points: [
+                  "PDF/Excel export",
+                  "Payment breakdowns",
+                  "Historical tracking",
+                ],
                 delay: "0.6s",
               },
               {
                 icon: Users,
                 title: "Resident Management",
-                description: "Track owners and tenants. Auto-flag overdue payments and cumulative pending dues.",
-                points: ["Flat master records", "Payment history", "Dues alerts"],
+                description:
+                  "Track owners and tenants. Auto-flag overdue payments and cumulative pending dues.",
+                points: [
+                  "Flat master records",
+                  "Payment history",
+                  "Dues alerts",
+                ],
                 delay: "0.7s",
               },
               {
                 icon: Shield,
                 title: "Admin Controls",
-                description: "Treasurer login dashboard to verify submissions, mark payments, and manage flat records.",
-                points: ["Secure JWT auth", "Role-based access", "Activity logs"],
+                description:
+                  "Treasurer login dashboard to verify submissions, mark payments, and manage flat records.",
+                points: [
+                  "Secure JWT auth",
+                  "Role-based access",
+                  "Activity logs",
+                ],
                 delay: "0.8s",
               },
               {
                 icon: Smartphone,
                 title: "PWA & Mobile",
-                description: "Fully responsive, installable on Android and iOS. Works offline with sync when online.",
-                points: ["Offline support", "Mobile installable", "Fast & responsive"],
+                description:
+                  "Fully responsive, installable on Android and iOS. Works offline with sync when online.",
+                points: [
+                  "Offline support",
+                  "Mobile installable",
+                  "Fast & responsive",
+                ],
                 delay: "0.9s",
               },
               {
                 icon: Clock,
                 title: "Real-time Tracking",
-                description: "Track pending dues month-by-month. Get auto-alerts for overdue payments and maintain history.",
-                points: ["Cumulative tracking", "Auto-alerts", "Payment status"],
+                description:
+                  "Track pending dues month-by-month. Get auto-alerts for overdue payments and maintain history.",
+                points: [
+                  "Cumulative tracking",
+                  "Auto-alerts",
+                  "Payment status",
+                ],
                 delay: "1.0s",
               },
             ].map(({ icon: Icon, title, description, points, delay }, idx) => (
@@ -222,12 +317,13 @@ export default function Home() {
                 <h3 className="text-xl font-semibold text-foreground mb-3">
                   {title}
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  {description}
-                </p>
+                <p className="text-muted-foreground mb-4">{description}</p>
                 <ul className="space-y-2">
                   {points.map((point) => (
-                    <li key={point} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <li
+                      key={point}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
                       <span className="w-1.5 h-1.5 bg-primary rounded-full" />
                       {point}
                     </li>
@@ -246,7 +342,10 @@ export default function Home() {
           <div className="absolute bottom-0 left-1/3 w-60 h-60 bg-white/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
         </div>
 
-        <div className="container mx-auto px-4 text-center relative z-10 fade-in-up" style={{ animationDelay: "0.5s" }}>
+        <div
+          className="container mx-auto px-4 text-center relative z-10 fade-in-up"
+          style={{ animationDelay: "0.5s" }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Simplify Your Apartment Treasury?
           </h2>
@@ -269,7 +368,10 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-secondary/50 backdrop-blur-lg border-t border-border py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8 fade-in" style={{ animationDelay: "0.6s" }}>
+          <div
+            className="grid md:grid-cols-4 gap-8 mb-8 fade-in"
+            style={{ animationDelay: "0.6s" }}
+          >
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Building2 className="w-6 h-6 text-primary" />
@@ -280,10 +382,15 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-3">For Residents</h4>
+              <h4 className="font-semibold text-foreground mb-3">
+                For Residents
+              </h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link to="/submit-payment" className="hover:text-primary transition">
+                  <Link
+                    to="/submit-payment"
+                    className="hover:text-primary transition"
+                  >
                     Submit Payment
                   </Link>
                 </li>
@@ -303,7 +410,10 @@ export default function Home() {
               <h4 className="font-semibold text-foreground mb-3">For Admin</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link to="/admin/login" className="hover:text-primary transition">
+                  <Link
+                    to="/admin/login"
+                    className="hover:text-primary transition"
+                  >
                     Admin Login
                   </Link>
                 </li>
@@ -318,12 +428,18 @@ export default function Home() {
               <h4 className="font-semibold text-foreground mb-3">Contact</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="mailto:support@treasury.local" className="hover:text-primary transition">
+                  <a
+                    href="mailto:support@treasury.local"
+                    className="hover:text-primary transition"
+                  >
                     support@treasury.local
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+91-90000-00000" className="hover:text-primary transition">
+                  <a
+                    href="tel:+91-90000-00000"
+                    className="hover:text-primary transition"
+                  >
                     +91 90000 00000
                   </a>
                 </li>

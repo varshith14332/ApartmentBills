@@ -12,12 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Building2,
-  ArrowLeft,
-  Upload,
-  CheckCircle2,
-} from "lucide-react";
+import { Building2, ArrowLeft, Upload, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type SubmissionStatus = "idle" | "loading" | "success" | "error";
@@ -45,7 +40,7 @@ export default function PaymentSubmit() {
   });
 
   const flatNumbers = Array.from({ length: 5 }, (_, floor) =>
-    Array.from({ length: 8 }, (_, flat) => `${(floor + 1) * 100 + (flat + 1)}`)
+    Array.from({ length: 8 }, (_, flat) => `${(floor + 1) * 100 + (flat + 1)}`),
   ).flat();
   // This generates: 101-108, 201-208, 301-308, 401-408, 501-508
   const paymentPurposes = [
@@ -59,7 +54,7 @@ export default function PaymentSubmit() {
   ];
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -239,7 +234,10 @@ export default function PaymentSubmit() {
       {/* Navigation */}
       <nav className="border-b border-border bg-white/50 backdrop-blur-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 fade-in-left">
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:opacity-80 fade-in-left"
+          >
             <ArrowLeft className="w-5 h-5 text-muted-foreground" />
             <Building2 className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold text-foreground">Treasury</span>
@@ -259,7 +257,10 @@ export default function PaymentSubmit() {
             </p>
           </div>
 
-          <Card className="glass rounded-lg p-8 fade-in-up" style={{ animationDelay: "0.3s" }}>
+          <Card
+            className="glass rounded-lg p-8 fade-in-up"
+            style={{ animationDelay: "0.3s" }}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Flat Number and Resident Info */}
               <div className="grid md:grid-cols-2 gap-6">
@@ -337,10 +338,7 @@ export default function PaymentSubmit() {
                     </SelectTrigger>
                     <SelectContent>
                       {paymentPurposes.map((purpose) => (
-                        <SelectItem
-                          key={purpose}
-                          value={purpose.toLowerCase()}
-                        >
+                        <SelectItem key={purpose} value={purpose.toLowerCase()}>
                           {purpose}
                         </SelectItem>
                       ))}
@@ -490,7 +488,9 @@ export default function PaymentSubmit() {
           {/* Info Section */}
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="font-semibold text-blue-900 mb-2">What happens next?</h3>
+              <h3 className="font-semibold text-blue-900 mb-2">
+                What happens next?
+              </h3>
               <p className="text-sm text-blue-800">
                 The treasurer will verify your payment and update the records
                 within 24 hours.
@@ -498,7 +498,9 @@ export default function PaymentSubmit() {
             </div>
 
             <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-              <h3 className="font-semibold text-green-900 mb-2">Keep your proof</h3>
+              <h3 className="font-semibold text-green-900 mb-2">
+                Keep your proof
+              </h3>
               <p className="text-sm text-green-800">
                 Always maintain a copy of your payment proof for your records.
               </p>

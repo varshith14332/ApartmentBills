@@ -17,7 +17,10 @@ const upload = multer({
     },
     filename: (_req, file, cb) => {
       const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-      cb(null, file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname));
+      cb(
+        null,
+        file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname),
+      );
     },
   }),
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
@@ -52,7 +55,11 @@ export function createServer() {
   app.post("/api/admin/login", handleAdminLogin);
 
   // Payment routes
-  app.post("/api/payments/submit", upload.single("screenshot"), handlePaymentSubmit);
+  app.post(
+    "/api/payments/submit",
+    upload.single("screenshot"),
+    handlePaymentSubmit,
+  );
 
   // Dashboard routes (protected)
   app.get("/api/admin/dashboard", authenticateToken, handleDashboard);
