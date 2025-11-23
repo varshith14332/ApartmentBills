@@ -259,7 +259,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="mb-8">
+        <div className="mb-8 fade-in" style={{ animationDelay: "0.7s" }}>
           <h2 className="text-lg font-semibold text-foreground mb-4">
             Quick Actions
           </h2>
@@ -267,7 +267,8 @@ export default function AdminDashboard() {
             <Link to="/admin/monthly-payments">
               <Button
                 variant="outline"
-                className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary"
+                className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary hover:glass transition-all duration-300 fade-in-up"
+                style={{ animationDelay: "0.75s" }}
               >
                 <BarChart3 className="w-5 h-5" />
                 <span className="text-sm">Monthly Table</span>
@@ -277,7 +278,8 @@ export default function AdminDashboard() {
             <Link to="/admin/pending-dues">
               <Button
                 variant="outline"
-                className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary"
+                className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary hover:glass transition-all duration-300 fade-in-up"
+                style={{ animationDelay: "0.8s" }}
               >
                 <Clock className="w-5 h-5" />
                 <span className="text-sm">Pending Dues</span>
@@ -287,7 +289,8 @@ export default function AdminDashboard() {
             <Link to="/admin/flat-master">
               <Button
                 variant="outline"
-                className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary"
+                className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary hover:glass transition-all duration-300 fade-in-up"
+                style={{ animationDelay: "0.85s" }}
               >
                 <Building2 className="w-5 h-5" />
                 <span className="text-sm">Flat Master</span>
@@ -296,8 +299,9 @@ export default function AdminDashboard() {
 
             <Button
               variant="outline"
-              className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary"
+              className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary hover:glass transition-all duration-300 fade-in-up"
               disabled
+              style={{ animationDelay: "0.9s" }}
             >
               <Download className="w-5 h-5" />
               <span className="text-sm">Export Report</span>
@@ -306,7 +310,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent Activity */}
-        <Card className="border border-border p-6">
+        <Card className="glass p-6 fade-in-up" style={{ animationDelay: "0.95s" }}>
           <h2 className="text-lg font-semibold text-foreground mb-4">
             Recent Activity
           </h2>
