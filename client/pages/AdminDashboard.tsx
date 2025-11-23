@@ -73,25 +73,29 @@ export default function AdminDashboard() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `/api/admin/dashboard?month=${selectedMonth}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
 
-      if (!response.ok) {
-        if (response.status === 401) {
+      const [dashboardResponse, recentResponse] = await Promise.all([
+        fetch(`/api/admin/dashboard?month=${selectedMonth}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        fetch(`/api/admin/recent-payments?limit=5`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+
+      if (!dashboardResponse.ok || !recentResponse.ok) {
+        if (dashboardResponse.status === 401 || recentResponse.status === 401) {
           navigate("/admin/login");
           return;
         }
         throw new Error("Failed to fetch dashboard data");
       }
 
-      const data = await response.json();
-      setDashboardData(data);
+      const dashboardData = await dashboardResponse.json();
+      const recentData = await recentResponse.json();
+
+      setDashboardData(dashboardData);
+      setRecentPayments(recentData);
     } catch (error) {
       toast({
         title: "Error",
