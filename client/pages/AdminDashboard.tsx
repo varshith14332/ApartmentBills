@@ -123,11 +123,11 @@ export default function AdminDashboard() {
   ).toFixed(0);
 
   return (
-    <div className="w-full bg-background min-h-screen">
+    <div className="w-full bg-background min-h-screen overflow-hidden">
       {/* Navigation */}
-      <nav className="border-b border-border bg-white sticky top-0 z-50">
+      <nav className="border-b border-border bg-white/50 backdrop-blur-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 fade-in-left">
             <Building2 className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold text-foreground">
               Admin Dashboard
@@ -137,7 +137,7 @@ export default function AdminDashboard() {
             variant="outline"
             size="sm"
             onClick={handleLogout}
-            className="gap-2"
+            className="gap-2 fade-in-right"
           >
             <LogOut className="w-4 h-4" />
             Logout
@@ -147,7 +147,7 @@ export default function AdminDashboard() {
 
       <div className="container mx-auto px-4 py-8">
         {/* Header and Month Selector */}
-        <div className="mb-8">
+        <div className="mb-8 fade-in-down" style={{ animationDelay: "0.2s" }}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">
