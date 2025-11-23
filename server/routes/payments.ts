@@ -119,8 +119,8 @@ export const getDashboardData = (month: string) => {
   );
   const flatsPaid = uniqueFlats.size;
 
-  // For demo purposes, assume 25 total flats
-  const totalFlats = 25;
+  // For demo purposes, assume 40 total flats (5 floors × 8 flats each)
+  const totalFlats = 40;
   const flatsNotPaid = totalFlats - flatsPaid;
 
   // Calculate total pending based on maintenance amount
