@@ -326,7 +326,7 @@ export default function AdminDashboard() {
             <Button
               variant="outline"
               className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary hover:glass transition-all duration-300 fade-in-up"
-              disabled
+              onClick={handleExportReport}
               style={{ animationDelay: "0.9s" }}
             >
               <Download className="w-5 h-5" />
