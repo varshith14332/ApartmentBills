@@ -256,7 +256,7 @@ export default function PaymentSubmit() {
             </p>
           </div>
 
-          <Card className="border border-border p-8">
+          <Card className="glass rounded-lg p-8 fade-in-up" style={{ animationDelay: "0.3s" }}>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Flat Number and Resident Info */}
               <div className="grid md:grid-cols-2 gap-6">
