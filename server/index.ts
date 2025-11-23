@@ -3,11 +3,18 @@ import express from "express";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 import { handleDemo } from "./routes/demo";
 import { handleAdminLogin } from "./routes/admin";
 import { handlePaymentSubmit } from "./routes/payments";
 import { handleDashboard } from "./routes/dashboard";
 import { authenticateToken } from "./middleware/auth";
+
+// Ensure uploads directory exists
+const uploadsDir = "uploads";
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 // Configure multer for file uploads
 const upload = multer({
