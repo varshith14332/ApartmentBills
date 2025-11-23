@@ -56,6 +56,7 @@ export default function AdminDashboard() {
     flatsNotPaid: 7,
     month: selectedMonth,
   });
+  const [recentPayments, setRecentPayments] = useState<RecentPayment[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
