@@ -67,6 +67,13 @@ export default function AdminDashboard() {
     }
 
     fetchDashboardData();
+
+    // Poll for updates every 5 seconds
+    const pollInterval = setInterval(() => {
+      fetchDashboardData();
+    }, 5000);
+
+    return () => clearInterval(pollInterval);
   }, [selectedMonth, navigate]);
 
   const fetchDashboardData = async () => {
