@@ -58,6 +58,13 @@ export default function MonthlyPayments() {
     }
 
     fetchMonthlyPayments();
+
+    // Poll for updates every 5 seconds
+    const pollInterval = setInterval(() => {
+      fetchMonthlyPayments();
+    }, 5000);
+
+    return () => clearInterval(pollInterval);
   }, [selectedMonth, navigate]);
 
   const fetchMonthlyPayments = async () => {
