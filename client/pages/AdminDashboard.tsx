@@ -177,7 +177,7 @@ export default function AdminDashboard() {
         {/* Summary Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {/* Total Collected */}
-          <Card className="border border-border p-6 hover:shadow-lg transition">
+          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.3s" }}>
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
                   ₹{dashboardData.totalCollected.toLocaleString()}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center glow-effect">
                 <TrendingUp className="w-5 h-5 text-green-600" />
               </div>
             </div>
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Total Pending */}
-          <Card className="border border-border p-6 hover:shadow-lg transition">
+          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.4s" }}>
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -207,7 +207,7 @@ export default function AdminDashboard() {
                   ₹{dashboardData.totalPending.toLocaleString()}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center glow-effect">
                 <Clock className="w-5 h-5 text-orange-600" />
               </div>
             </div>
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Flats Paid */}
-          <Card className="border border-border p-6 hover:shadow-lg transition">
+          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.5s" }}>
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
                   {dashboardData.flatsPaid}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center glow-effect">
                 <Users className="w-5 h-5 text-blue-600" />
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Flats Not Paid */}
-          <Card className="border border-border p-6 hover:shadow-lg transition">
+          <Card className="glass p-6 hover:glass-dark transition-all duration-300 transform hover:scale-105 fade-in-up" style={{ animationDelay: "0.6s" }}>
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
@@ -247,7 +247,7 @@ export default function AdminDashboard() {
                   {dashboardData.flatsNotPaid}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center glow-effect">
                 <AlertCircle className="w-5 h-5 text-red-600" />
               </div>
             </div>
