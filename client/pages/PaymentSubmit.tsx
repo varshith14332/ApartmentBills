@@ -26,6 +26,11 @@ export default function PaymentSubmit() {
   const { toast } = useToast();
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [file, setFile] = useState<File | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
   const [formData, setFormData] = useState({
     flatNumber: "",
     residentName: "",
