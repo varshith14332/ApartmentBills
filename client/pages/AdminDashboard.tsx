@@ -118,6 +118,46 @@ export default function AdminDashboard() {
     navigate("/");
   };
 
+  const handleExportReport = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `/api/admin/export-report?month=${selectedMonth}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to export report");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `payments-${selectedMonth}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast({
+        title: "Success",
+        description: "Report exported successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description:
+          error instanceof Error ? error.message : "Failed to export report",
+        variant: "destructive",
+      });
+    }
+  };
+
   const currentYear = new Date().getFullYear();
   const months = Array.from({ length: 12 }, (_, i) => {
     const date = new Date(currentYear, i, 1);
