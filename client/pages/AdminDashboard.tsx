@@ -93,11 +93,11 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("admin");
-    navigate("/admin/login");
     toast({
       title: "Logged out",
       description: "You have been logged out successfully",
     });
+    navigate("/");
   };
 
   const currentYear = new Date().getFullYear();
