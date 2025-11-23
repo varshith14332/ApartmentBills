@@ -6,7 +6,12 @@ import path from "path";
 import fs from "fs";
 import { handleDemo } from "./routes/demo";
 import { handleAdminLogin } from "./routes/admin";
-import { handlePaymentSubmit, getMonthlyPayments, getRecentPayments, getAllPayments } from "./routes/payments";
+import {
+  handlePaymentSubmit,
+  getMonthlyPayments,
+  getRecentPayments,
+  getAllPayments,
+} from "./routes/payments";
 import { handleDashboard } from "./routes/dashboard";
 import { authenticateToken } from "./middleware/auth";
 
@@ -108,8 +113,18 @@ export function createServer() {
       const data = month ? getMonthlyPayments(month) : getAllPayments();
 
       // Create CSV content
-      const headers = ["Flat No", "Name", "Amount Paid", "Transaction ID", "Paid Status", "Payment Date", "Purpose", "Resident Type", "Notes"];
-      const rows = data.map(payment => [
+      const headers = [
+        "Flat No",
+        "Name",
+        "Amount Paid",
+        "Transaction ID",
+        "Paid Status",
+        "Payment Date",
+        "Purpose",
+        "Resident Type",
+        "Notes",
+      ];
+      const rows = data.map((payment) => [
         payment.flatNumber,
         payment.residentName,
         `₹${payment.amountPaid}`,
@@ -118,15 +133,20 @@ export function createServer() {
         new Date(payment.paymentDate).toLocaleDateString(),
         payment.paymentPurpose,
         payment.residentType,
-        payment.notes || "-"
+        payment.notes || "-",
       ]);
 
-      const csv = [headers, ...rows].map(row =>
-        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")
-      ).join("\n");
+      const csv = [headers, ...rows]
+        .map((row) =>
+          row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","),
+        )
+        .join("\n");
 
       res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", `attachment; filename="payments-${month || "all"}.csv"`);
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="payments-${month || "all"}.csv"`,
+      );
       res.send(csv);
     } catch (error) {
       console.error("Error exporting report:", error);

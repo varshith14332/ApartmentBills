@@ -425,7 +425,8 @@ export default function AdminDashboard() {
                         Payment from Flat {payment.flatNumber}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        ₹{payment.amountPaid.toLocaleString()} - {payment.paymentPurpose}
+                        ₹{payment.amountPaid.toLocaleString()} -{" "}
+                        {payment.paymentPurpose}
                       </p>
                     </div>
                     <p className="text-sm text-muted-foreground">{timeLabel}</p>
