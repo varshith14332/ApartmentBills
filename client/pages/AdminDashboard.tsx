@@ -22,6 +22,10 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+interface AnimationDelay {
+  delay: string;
+}
+
 interface DashboardData {
   totalCollected: number;
   totalPending: number;
