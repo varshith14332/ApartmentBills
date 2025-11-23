@@ -77,18 +77,22 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="w-full bg-gradient-to-br from-primary/10 via-background to-accent/10 min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="w-full bg-gradient-to-br from-primary/10 via-background to-accent/10 min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+      {/* Animated background blobs */}
+      <div className="absolute top-10 right-10 w-64 h-64 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse opacity-70"></div>
+      <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse opacity-70 delay-2000"></div>
+
+      <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+        <div className="flex items-center justify-center gap-3 mb-8 fade-in-down" style={{ animationDelay: "0s" }}>
+          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center float">
             <Building2 className="w-6 h-6 text-primary-foreground" />
           </div>
           <h1 className="text-2xl font-bold text-foreground">Treasury</h1>
         </div>
 
         {/* Login Card */}
-        <Card className="border border-border p-8 shadow-lg">
+        <Card className="glass p-8 shadow-lg fade-in-up" style={{ animationDelay: "0.2s" }}>
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-foreground mb-2">
               Admin Login
