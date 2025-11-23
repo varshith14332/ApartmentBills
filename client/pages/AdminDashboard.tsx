@@ -344,39 +344,52 @@ export default function AdminDashboard() {
             Recent Activity
           </h2>
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
-              <div>
-                <p className="font-medium text-foreground">
-                  Payment from Flat A-12
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  ₹5,000 - Maintenance
-                </p>
+            {recentPayments.length > 0 ? (
+              recentPayments.map((payment) => {
+                const date = new Date(payment.createdAt);
+                const now = new Date();
+                const diffMs = now.getTime() - date.getTime();
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                const diffMinutes = Math.floor(diffMs / (1000 * 60));
+
+                let timeLabel = "";
+                if (diffMinutes < 1) {
+                  timeLabel = "Just now";
+                } else if (diffMinutes < 60) {
+                  timeLabel = `${diffMinutes}m ago`;
+                } else if (diffHours < 24) {
+                  timeLabel = `${diffHours}h ago`;
+                } else if (diffDays === 1) {
+                  timeLabel = "Yesterday";
+                } else if (diffDays < 7) {
+                  timeLabel = `${diffDays}d ago`;
+                } else {
+                  timeLabel = date.toLocaleDateString();
+                }
+
+                return (
+                  <div
+                    key={payment.id}
+                    className="flex items-center justify-between py-3 border-b border-border last:border-b-0"
+                  >
+                    <div>
+                      <p className="font-medium text-foreground">
+                        Payment from Flat {payment.flatNumber}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        ₹{payment.amountPaid.toLocaleString()} - {payment.paymentPurpose}
+                      </p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{timeLabel}</p>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No recent payments</p>
               </div>
-              <p className="text-sm text-muted-foreground">Today</p>
-            </div>
-            <div className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
-              <div>
-                <p className="font-medium text-foreground">
-                  Payment from Flat A-18
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  ₹5,000 - Maintenance
-                </p>
-              </div>
-              <p className="text-sm text-muted-foreground">Yesterday</p>
-            </div>
-            <div className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
-              <div>
-                <p className="font-medium text-foreground">
-                  Payment from Flat A-5
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  ₹5,000 - Maintenance
-                </p>
-              </div>
-              <p className="text-sm text-muted-foreground">2 days ago</p>
-            </div>
+            )}
           </div>
         </Card>
       </div>
