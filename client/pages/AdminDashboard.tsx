@@ -34,6 +34,15 @@ interface DashboardData {
   month: string;
 }
 
+interface RecentPayment {
+  id: string;
+  flatNumber: string;
+  residentName: string;
+  amountPaid: number;
+  paymentPurpose: string;
+  createdAt: string;
+}
+
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
