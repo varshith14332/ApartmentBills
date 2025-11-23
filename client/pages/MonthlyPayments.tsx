@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -275,7 +275,7 @@ export default function MonthlyPayments() {
                 </thead>
                 <tbody>
                   {payments.map((payment) => (
-                    <div key={payment.id}>
+                    <React.Fragment key={payment.id}>
                       <tr className="border-b border-border hover:bg-secondary/30 transition-colors">
                         <td className="py-4 px-4 text-foreground">
                           {payment.flatNumber}
@@ -412,7 +412,7 @@ export default function MonthlyPayments() {
                           </td>
                         </tr>
                       )}
-                    </div>
+                    </React.Fragment>
                   ))}
                 </tbody>
               </table>
