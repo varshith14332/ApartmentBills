@@ -133,3 +133,25 @@ export const getDashboardData = (month: string) => {
     month,
   };
 };
+
+export const getMonthlyPayments = (month: string) => {
+  return payments
+    .filter((p) => p.month === month)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
+};
+
+export const getRecentPayments = (limit: number = 10) => {
+  return payments
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
+    .slice(0, limit);
+};
+
+export const getAllPayments = () => {
+  return payments;
+};

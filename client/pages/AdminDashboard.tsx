@@ -34,6 +34,15 @@ interface DashboardData {
   month: string;
 }
 
+interface RecentPayment {
+  id: string;
+  flatNumber: string;
+  residentName: string;
+  amountPaid: number;
+  paymentPurpose: string;
+  createdAt: string;
+}
+
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -47,6 +56,7 @@ export default function AdminDashboard() {
     flatsNotPaid: 7,
     month: selectedMonth,
   });
+  const [recentPayments, setRecentPayments] = useState<RecentPayment[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -57,31 +67,42 @@ export default function AdminDashboard() {
     }
 
     fetchDashboardData();
+
+    // Poll for updates every 5 seconds
+    const pollInterval = setInterval(() => {
+      fetchDashboardData();
+    }, 5000);
+
+    return () => clearInterval(pollInterval);
   }, [selectedMonth, navigate]);
 
   const fetchDashboardData = async () => {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `/api/admin/dashboard?month=${selectedMonth}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
 
-      if (!response.ok) {
-        if (response.status === 401) {
+      const [dashboardResponse, recentResponse] = await Promise.all([
+        fetch(`/api/admin/dashboard?month=${selectedMonth}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        fetch(`/api/admin/recent-payments?limit=5`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+
+      if (!dashboardResponse.ok || !recentResponse.ok) {
+        if (dashboardResponse.status === 401 || recentResponse.status === 401) {
           navigate("/admin/login");
           return;
         }
         throw new Error("Failed to fetch dashboard data");
       }
 
-      const data = await response.json();
-      setDashboardData(data);
+      const dashboardData = await dashboardResponse.json();
+      const recentData = await recentResponse.json();
+
+      setDashboardData(dashboardData);
+      setRecentPayments(recentData);
     } catch (error) {
       toast({
         title: "Error",
@@ -102,6 +123,46 @@ export default function AdminDashboard() {
       description: "You have been logged out successfully",
     });
     navigate("/");
+  };
+
+  const handleExportReport = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `/api/admin/export-report?month=${selectedMonth}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to export report");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `payments-${selectedMonth}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast({
+        title: "Success",
+        description: "Report exported successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description:
+          error instanceof Error ? error.message : "Failed to export report",
+        variant: "destructive",
+      });
+    }
   };
 
   const currentYear = new Date().getFullYear();
@@ -312,7 +373,7 @@ export default function AdminDashboard() {
             <Button
               variant="outline"
               className="w-full h-20 flex flex-col items-center justify-center gap-2 hover:border-primary hover:text-primary hover:glass transition-all duration-300 fade-in-up"
-              disabled
+              onClick={handleExportReport}
               style={{ animationDelay: "0.9s" }}
             >
               <Download className="w-5 h-5" />
@@ -330,39 +391,53 @@ export default function AdminDashboard() {
             Recent Activity
           </h2>
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
-              <div>
-                <p className="font-medium text-foreground">
-                  Payment from Flat A-12
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  ₹5,000 - Maintenance
-                </p>
+            {recentPayments.length > 0 ? (
+              recentPayments.map((payment) => {
+                const date = new Date(payment.createdAt);
+                const now = new Date();
+                const diffMs = now.getTime() - date.getTime();
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                const diffMinutes = Math.floor(diffMs / (1000 * 60));
+
+                let timeLabel = "";
+                if (diffMinutes < 1) {
+                  timeLabel = "Just now";
+                } else if (diffMinutes < 60) {
+                  timeLabel = `${diffMinutes}m ago`;
+                } else if (diffHours < 24) {
+                  timeLabel = `${diffHours}h ago`;
+                } else if (diffDays === 1) {
+                  timeLabel = "Yesterday";
+                } else if (diffDays < 7) {
+                  timeLabel = `${diffDays}d ago`;
+                } else {
+                  timeLabel = date.toLocaleDateString();
+                }
+
+                return (
+                  <div
+                    key={payment.id}
+                    className="flex items-center justify-between py-3 border-b border-border last:border-b-0"
+                  >
+                    <div>
+                      <p className="font-medium text-foreground">
+                        Payment from Flat {payment.flatNumber}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        ₹{payment.amountPaid.toLocaleString()} -{" "}
+                        {payment.paymentPurpose}
+                      </p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{timeLabel}</p>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No recent payments</p>
               </div>
-              <p className="text-sm text-muted-foreground">Today</p>
-            </div>
-            <div className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
-              <div>
-                <p className="font-medium text-foreground">
-                  Payment from Flat A-18
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  ₹5,000 - Maintenance
-                </p>
-              </div>
-              <p className="text-sm text-muted-foreground">Yesterday</p>
-            </div>
-            <div className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
-              <div>
-                <p className="font-medium text-foreground">
-                  Payment from Flat A-5
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  ₹5,000 - Maintenance
-                </p>
-              </div>
-              <p className="text-sm text-muted-foreground">2 days ago</p>
-            </div>
+            )}
           </div>
         </Card>
       </div>
