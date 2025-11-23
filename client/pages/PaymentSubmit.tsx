@@ -44,7 +44,10 @@ export default function PaymentSubmit() {
     notes: "",
   });
 
-  const flatNumbers = Array.from({ length: 25 }, (_, i) => `A-${i + 1}`);
+  const flatNumbers = Array.from({ length: 5 }, (_, floor) =>
+    Array.from({ length: 8 }, (_, flat) => `${(floor + 1) * 100 + (flat + 1)}`)
+  ).flat();
+  // This generates: 101-108, 201-208, 301-308, 401-408, 501-508
   const paymentPurposes = [
     "Maintenance",
     "Repair",
