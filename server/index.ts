@@ -71,5 +71,68 @@ export function createServer() {
   // Dashboard routes (protected)
   app.get("/api/admin/dashboard", authenticateToken, handleDashboard);
 
+  // Get monthly payments (protected)
+  app.get("/api/admin/monthly-payments", authenticateToken, (_req, res) => {
+    try {
+      const month = _req.query.month as string;
+      if (!month) {
+        const now = new Date();
+        const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+        const data = getMonthlyPayments(currentMonth);
+        return res.json(data);
+      }
+      const data = getMonthlyPayments(month);
+      res.json(data);
+    } catch (error) {
+      console.error("Error fetching monthly payments:", error);
+      res.status(500).json({ message: "Failed to fetch monthly payments" });
+    }
+  });
+
+  // Get recent payments (protected)
+  app.get("/api/admin/recent-payments", authenticateToken, (_req, res) => {
+    try {
+      const limit = parseInt(_req.query.limit as string) || 10;
+      const data = getRecentPayments(limit);
+      res.json(data);
+    } catch (error) {
+      console.error("Error fetching recent payments:", error);
+      res.status(500).json({ message: "Failed to fetch recent payments" });
+    }
+  });
+
+  // Export payments report (protected)
+  app.get("/api/admin/export-report", authenticateToken, (_req, res) => {
+    try {
+      const month = _req.query.month as string;
+      const data = month ? getMonthlyPayments(month) : getAllPayments();
+
+      // Create CSV content
+      const headers = ["Flat No", "Name", "Amount Paid", "Transaction ID", "Paid Status", "Payment Date", "Purpose", "Resident Type", "Notes"];
+      const rows = data.map(payment => [
+        payment.flatNumber,
+        payment.residentName,
+        `₹${payment.amountPaid}`,
+        payment.transactionId,
+        "Paid",
+        new Date(payment.paymentDate).toLocaleDateString(),
+        payment.paymentPurpose,
+        payment.residentType,
+        payment.notes || "-"
+      ]);
+
+      const csv = [headers, ...rows].map(row =>
+        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+      ).join("\n");
+
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", `attachment; filename="payments-${month || "all"}.csv"`);
+      res.send(csv);
+    } catch (error) {
+      console.error("Error exporting report:", error);
+      res.status(500).json({ message: "Failed to export report" });
+    }
+  });
+
   return app;
 }
