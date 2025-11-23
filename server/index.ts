@@ -6,7 +6,7 @@ import path from "path";
 import fs from "fs";
 import { handleDemo } from "./routes/demo";
 import { handleAdminLogin } from "./routes/admin";
-import { handlePaymentSubmit } from "./routes/payments";
+import { handlePaymentSubmit, getMonthlyPayments, getRecentPayments, getAllPayments } from "./routes/payments";
 import { handleDashboard } from "./routes/dashboard";
 import { authenticateToken } from "./middleware/auth";
 
