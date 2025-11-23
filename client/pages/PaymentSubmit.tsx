@@ -199,7 +199,7 @@ export default function PaymentSubmit() {
   if (status === "success") {
     return (
       <div className="w-full bg-background min-h-screen">
-        <nav className="border-b border-border bg-white">
+        <nav className="border-b border-border bg-white/50 backdrop-blur-lg sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex items-center gap-2">
             <Building2 className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold text-foreground">
@@ -209,21 +209,21 @@ export default function PaymentSubmit() {
         </nav>
 
         <div className="container mx-auto px-4 py-16">
-          <div className="max-w-md mx-auto text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+          <div className="max-w-md mx-auto text-center fade-in-up">
+            <div className="mb-6 flex justify-center scale-in">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center float">
                 <CheckCircle2 className="w-8 h-8 text-green-600" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-foreground mb-3">
+            <h1 className="text-2xl font-bold text-foreground mb-3 fade-in-down">
               Payment Submitted!
             </h1>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-8 fade-in">
               Your payment proof has been received. The treasurer will verify it
               shortly. Thank you!
             </p>
             <Link to="/">
-              <Button>Return to Home</Button>
+              <Button className="glow-effect">Return to Home</Button>
             </Link>
           </div>
         </div>
@@ -234,9 +234,9 @@ export default function PaymentSubmit() {
   return (
     <div className="w-full bg-background min-h-screen">
       {/* Navigation */}
-      <nav className="border-b border-border bg-white sticky top-0 z-50">
+      <nav className="border-b border-border bg-white/50 backdrop-blur-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80">
+          <Link to="/" className="flex items-center gap-2 hover:opacity-80 fade-in-left">
             <ArrowLeft className="w-5 h-5 text-muted-foreground" />
             <Building2 className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold text-foreground">Treasury</span>
@@ -246,7 +246,7 @@ export default function PaymentSubmit() {
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
-          <div className="mb-8">
+          <div className="mb-8 fade-in-up" style={{ animationDelay: "0.2s" }}>
             <h1 className="text-3xl font-bold text-foreground mb-2">
               Submit Payment Proof
             </h1>
